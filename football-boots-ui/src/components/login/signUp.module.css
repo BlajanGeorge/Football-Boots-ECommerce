@@ -1,0 +1,268 @@
+.container{
+    background-color: #13669eb6;
+    width:537px;
+    height:100%;
+    position: absolute;
+    top: 0;
+    left:0;
+    border-radius: 8px;
+}
+
+.discover_text{
+    position: absolute;
+    width: 404px;
+    height: 120px;
+    left: 50px;
+    top: 40%;
+
+    font-family: Roboto Slab !important;
+    font-style: normal;
+    font-weight: bold !important;
+    font-size: 32px !important;
+    line-height: 40px !important;
+    letter-spacing: 0.03em !important;
+
+    color: #000000;
+}
+
+.login_text{
+    position: absolute;
+    width: 255px;
+    height: 32px;
+    left: 820px;
+    top: 80px;
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 60px !important;
+    line-height: 32px !important;
+
+    color: #000000;
+}
+
+.allTextTogheter{
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+}
+
+.first_name_text{
+    position: absolute;
+    width: 173px;
+    height: 18px;
+    left: 723px;
+    top: 230px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    letter-spacing: 0.03em !important;
+
+    color: #000000;
+}
+
+.age_text{
+    position: absolute;
+    width: 173px;
+    height: 18px;
+    left: 723px;
+    top: 320px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    letter-spacing: 0.03em !important;
+
+    color: #000000;
+}
+
+.age_textfield{
+    position: absolute;
+    top:260px;
+    left:720px;
+    width: 185px;
+    height: 48px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.last_name_text{
+    position: absolute;
+    width: 173px;
+    height: 18px;
+    left: 970px;
+    top: 230px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    letter-spacing: 0.03em !important;
+
+    color: #000000;
+}
+
+.first_name_textfield{
+    position: absolute;
+    top:260px;
+    left:720px;
+    width: 185px;
+    height: 48px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.gender_text{
+    position: absolute;
+    width: 173px;
+    height: 18px;
+    left: 970px; 
+    top: 320px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    letter-spacing: 0.03em !important;
+
+    color: #000000;
+}
+
+.gender_combobox{
+    position: absolute;
+    left: 970px;
+    top: 355px;
+    width: 185px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 2px !important;
+    line-height: 18px !important;
+}
+
+.last_name_textfield{
+    position: absolute;
+    top:260px;
+    left:783px;
+    width: 185px;
+    height: 48px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.email_text{
+    position: absolute;
+    width: 173px;
+    height: 18px;
+    left: 723px;
+    top: 415px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    letter-spacing: 0.03em !important;
+
+    color: #000000;
+}
+
+.email_textfield{
+    position: absolute;
+    top:400px;
+    left:720px;
+    width: 435px;
+    height: 48px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.password_text{
+    position: absolute;
+    width: 173px;
+    height: 18px;
+    left: 723px;
+    top: 500px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    letter-spacing: 0.03em !important;
+
+    color: #000000;
+}
+
+.password_textfield{
+    position: absolute;
+    top:390px;
+    left:720px;
+    width: 435px;
+    height: 48px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.create_account_button{
+    position: absolute;
+    top:420px;
+    left:840px;
+    background: #359409 !important;
+    border-radius: 5px !important;
+    width: 185px !important;
+    height: 48px !important;
+    text-transform: none !important;
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.policy_text{
+    position: absolute;
+    width: 360px;
+    height: 36px;
+    left: 770px;
+    top: 690px;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+
+    color: #878888 !important;
+}
+
+.policy_text_blue{
+    color:#3F96D4;
+}
