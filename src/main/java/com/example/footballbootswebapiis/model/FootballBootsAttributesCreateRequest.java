@@ -17,7 +17,7 @@ public class FootballBootsAttributesCreateRequest {
     private Integer size;
     @Min(value = 0, message = "Price can't be negative.")
     @NotNull
-    private Float price;
+    private Integer price;
     @Min(value = 0, message = "Quantity can't be negative")
     @NotNull
     private Integer quantity;

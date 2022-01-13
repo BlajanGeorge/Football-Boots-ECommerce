@@ -1,0 +1,177 @@
+.container{
+    background-color: #0a0a0ad7;
+    position: absolute;
+    width:100%;
+    margin-top: 63px;
+    height:1000px;
+    top: 0;
+    left:0;
+}
+
+.profile_container{
+    background-color: black;
+    position: absolute;
+    top:100px;
+    left:500px;
+    height:800px;
+    width:800px;
+    border-radius: 8px;
+}
+
+.firstname_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    font-family: Roboto Slab !important;
+}
+
+.lastname_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    font-family: Roboto Slab !important;
+}
+
+
+.age_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 300px;
+    left: 100px;
+    font-family: Roboto Slab !important;
+}
+
+.gender_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 400px;
+    left: 100px;
+    font-family: Roboto Slab !important;
+}
+
+.email_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 500px;
+    left: 100px;
+    font-family: Roboto Slab !important;
+}
+
+.old_password_text{
+    font-size: 30px !important;
+    color: white;
+    position: absolute;
+    top: 600px;
+    left: 100px;
+    font-family: Roboto Slab !important;
+}
+
+.new_password_text{
+    font-size: 30px !important;
+    color: white;
+    position: absolute;
+    top: 670px;
+    left: 100px;
+    font-family: Roboto Slab !important;
+}
+
+.firstname_value_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 65px;
+    left: 350px;
+    font-family: Roboto Slab !important;
+}
+
+.lastname_value_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 165px;
+    left: 350px;
+    font-family: Roboto Slab !important;
+}
+
+.age_value_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 265px;
+    left: 300px;
+    font-family: Roboto Slab !important;
+}
+
+.gender_value_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 365px;
+    left: 300px;
+    font-family: Roboto Slab !important;
+}
+
+.email_value_text{
+    font-size: 40px !important;
+    color: white;
+    position: absolute;
+    top: 460px;
+    left: 300px;
+    font-family: Roboto Slab !important;
+}
+
+.change_password_button{
+    position: absolute;
+    top:690px;
+    left:-140px;
+    background: gray !important;
+    color:white !important;
+    border-radius: 5px !important;
+    width: 200px !important;
+    height: 48px !important;
+    text-transform: none !important;
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.old_password_text_field{
+    position: absolute;
+    top:600px;
+    left:350px;
+    width: 435px;
+    height: 48px !important;
+    background: white;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    border-radius: 8px;
+}
+
+.new_password_text_field{
+    position: absolute;
+    top:620px;
+    left:350px;
+    width: 435px;
+    height: 48px !important;
+    background: white;
+
+    font-family: Roboto Slab !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    border-radius: 8px;
+}

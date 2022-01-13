@@ -32,6 +32,10 @@ public class FootballBoots {
     @Column(nullable = false, columnDefinition = "varchar(255)")
     @Convert(converter = BrandConverter.class)
     private Brand brand;
+    @Column(nullable = false)
+    private String photoPath;
+    @Column(nullable = false)
+    private String bigPhotoPath;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "joinbetweenbootsandbootsattributes",
@@ -40,11 +44,12 @@ public class FootballBoots {
     )
     private List<FootballBootsAttributes> footballBootsAttributesList = new ArrayList<>();
 
-    public FootballBoots(String name, String description,Brand brand, List<FootballBootsAttributes> footballBootsAttributesList)
-    {
+    public FootballBoots(String name, String description, Brand brand, String photo, String bigPhotoPath, List<FootballBootsAttributes> footballBootsAttributesList) {
         this.name = name;
         this.description = description;
         this.brand = brand;
+        this.photoPath = photo;
+        this.bigPhotoPath = bigPhotoPath;
         this.footballBootsAttributesList.addAll(footballBootsAttributesList);
     }
 }

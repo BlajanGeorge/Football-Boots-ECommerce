@@ -20,5 +20,9 @@ public class FootballBootsCreateRequest {
     @NotNull
     private String brand;
     @NotNull
+    private String photoPath;
+    @NotNull
+    private String bigPhotoPath;
+    @NotNull
     private List<FootballBootsAttributesCreateRequest> footballBootsAttributesCreateRequestList;
 }

@@ -14,7 +14,7 @@ public class FootballBootsMapper {
         footballBootsCreateRequest.getFootballBootsAttributesCreateRequestList().stream()
                 .forEach(football -> footballBootsAttributesList.add(FootballBootsMapper.mapFromCreateRequestToAttributesModel(football)));
         return new FootballBoots(footballBootsCreateRequest.getName(), footballBootsCreateRequest.getDescription(), Brand.valueOf(footballBootsCreateRequest.getBrand()),
-                footballBootsAttributesList);
+                footballBootsCreateRequest.getPhotoPath(), footballBootsCreateRequest.getBigPhotoPath(), footballBootsAttributesList);
     }
 
     public static List<FootballBootsDefaultSizeResponse> mapFromDefaultResponseToArrayResponse(List<FootballBoots> footballBoots) {
@@ -32,18 +32,17 @@ public class FootballBootsMapper {
         return new FootballBootsDefaultSizeResponse(footballBoots.getId(), footballBoots.getName(),
                 footballBootsAttributes.get(0).getPrice(),
                 footballBootsAttributes.get(0).getQuantity(), footballBootsAttributes.get(0).getSize(),
-                footballBoots.getDescription(), footballBoots.getBrand().name());
+                footballBoots.getDescription(), footballBoots.getBrand().name(), footballBoots.getPhotoPath(), footballBoots.getBigPhotoPath());
     }
 
-    public static FootballBootsDefaultSizeResponse mapFromModelToSizeResponse(FootballBoots footballBoots, int size)
-    {
+    public static FootballBootsDefaultSizeResponse mapFromModelToSizeResponse(FootballBoots footballBoots, int size) {
         List<FootballBootsAttributes> footballBootsAttributes =
                 footballBoots.getFootballBootsAttributesList().stream().
                         filter(attribute -> attribute.getSize() == size).collect(Collectors.toList());
         return new FootballBootsDefaultSizeResponse(footballBoots.getId(), footballBoots.getName(),
                 footballBootsAttributes.get(0).getPrice(),
                 footballBootsAttributes.get(0).getQuantity(), footballBootsAttributes.get(0).getSize(),
-                footballBoots.getDescription(), footballBoots.getBrand().name());
+                footballBoots.getDescription(), footballBoots.getBrand().name(), footballBoots.getPhotoPath(), footballBoots.getBigPhotoPath());
     }
 
     public static FootballBootsAttributes mapFromCreateRequestToAttributesModel(FootballBootsAttributesCreateRequest footballBootsAttributesCreateRequest) {

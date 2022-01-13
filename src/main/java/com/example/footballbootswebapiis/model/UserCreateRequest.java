@@ -16,24 +16,16 @@ import javax.validation.constraints.*;
 @Validated
 public class UserCreateRequest {
     @NotBlank(message = "First name can't be blank.")
-    @Size(max = 255, message = "First name can't be longer than 255 characters.")
     private String firstName;
     @NotBlank(message = "Last name can't be blank.")
-    @Size(max = 255, message = "Last name can't be longer than 255 characters.")
     private String lastName;
-    @NotBlank(message = "Email can't be blank.")
-    @Size(max = 255, message = "Email can't be longer than 255 characters.")
     @EmailConstraint
     private String email;
-    @NotBlank(message = "Gender can't be blank.")
     @GenderConstraint
     private String gender;
-    @NotNull
-    @Range(min = 14, max = 120, message = "Age must be between 14 and 120.")
+    @NotNull(message = "Age is required, must be between 14 and 120.")
+    @Range(min = 14, max = 120, message = "Age is required, must be between 14 and 120.")
     private Integer age;
-    @NotBlank(message = "Password can't be blank.")
-    @Size(max = 20, message = "Password can't be longer than 20 characters.")
-    @Size(min = 8, message = "Password can't be shorter than 8 characters.")
     @PasswordConstraint
     private String password;
 }

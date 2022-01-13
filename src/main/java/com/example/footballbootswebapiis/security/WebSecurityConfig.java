@@ -21,11 +21,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .csrf().disable()
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/users/registration/customer").permitAll()
                 .antMatchers("/users/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/users/{id}").hasAnyRole("ADMIN", "CUSTOMER")
+                .antMatchers(HttpMethod.PUT, "/users/{id}").hasAnyRole("ADMIN", "CUSTOMER")
+                .antMatchers(HttpMethod.POST, "/basket/**").hasAnyRole("ADMIN", "CUSTOMER")
+                .antMatchers(HttpMethod.GET, "/users/order/{email}").hasAnyRole("ADMIN", "CUSTOMER")
                 .antMatchers("/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/boots").hasAnyRole("ADMIN", "CUSTOMER")
                 .antMatchers(HttpMethod.GET, "/boots/{id}/{size}").hasAnyRole("ADMIN", "CUSTOMER")

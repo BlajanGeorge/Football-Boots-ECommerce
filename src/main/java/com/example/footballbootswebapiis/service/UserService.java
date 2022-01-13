@@ -55,10 +55,10 @@ public class UserService {
             if (bCryptPasswordEncoder.matches(userLoginRequest.getPassword(), userOptional.get().getPassword())) {
                 return new UserLoginResponse(userOptional.get().getId(), tokenService.getJWTToken(userOptional.get().getFirstName(), userOptional.get().getRole()));
             } else {
-                throw new BadCredentialsException("Incorrect password!");
+                throw new BadCredentialsException("Incorrect email/password!");
             }
         } else {
-            throw new BadCredentialsException("This email doesn't exist!");
+            throw new BadCredentialsException("Incorrect email/password!");
         }
     }
 
@@ -71,6 +71,15 @@ public class UserService {
             log.error("Failed to send the email.");
         }
         return this.userRepository.save(user);
+    }
+
+    public void sendEmailForOrder(String email) {
+        try {
+            EmailSender.sendEmailForOrder("Order", "georgeblajan@yahoo.com", email);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            log.error("Failed to send the email.");
+        }
     }
 
     public void deleteUserById(int id) {
@@ -95,8 +104,12 @@ public class UserService {
         if (user.getAge() != null && user.getAge() >= 14 && user.getAge() <= 120) {
             oldUser.setAge(user.getAge());
         }
-        if (!StringUtils.isBlank(user.getPassword()) && PasswordValidator.isValid(user.getPassword())) {
-            oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        System.out.println("dada");
+        if (!StringUtils.isBlank(user.getNewPassword()) && PasswordValidator.isValid(user.getNewPassword())) {
+            if (bCryptPasswordEncoder.matches(user.getOldPassword(), oldUser.getPassword())) {
+                System.out.println("da");
+                oldUser.setPassword(bCryptPasswordEncoder.encode(user.getNewPassword()));
+            }
         }
         if (!StringUtils.isBlank(user.getEmail()) && EmailValidator.isValid(user.getEmail())) {
             oldUser.setEmail(user.getEmail());

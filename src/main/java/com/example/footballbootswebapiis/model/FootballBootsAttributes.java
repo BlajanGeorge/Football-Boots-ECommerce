@@ -25,11 +25,11 @@ public class FootballBootsAttributes {
     @Column(nullable = false)
     private int quantity;
     @Column(nullable = false)
-    private float price;
+    private int price;
     @ManyToMany(mappedBy = "footballBootsAttributesList")
     private List<FootballBoots> footballBootsSet = new ArrayList<>();
 
-    public FootballBootsAttributes(int size, int quantity, float price) {
+    public FootballBootsAttributes(int size, int quantity, int price) {
         this.size = size;
         this.quantity = quantity;
         this.price = price;

@@ -7,14 +7,24 @@ import axios from 'axios';
 
 const Login =  () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
 
     async function makePostRequestForLogin() {
-        const res = await axios.post('http://localhost:10000/users/login', {email, password});
-        if(res.status == 200){
+        const res = await axios.post('http://localhost:10000/users/login', {email, password})
+        .then(function(res){
             localStorage.setItem('token', res.data.token)
+            localStorage.setItem('userId', res.data.id)
+            localStorage.setItem('userEmail', email)
+            window.location.replace('http://localhost:3000/boots')
         }
+        )
+        .catch(function (error) {
+            if (error.response) {
+              setErrorMessage(error.response.data)
+            }
+        })
     }
 
    return (
@@ -39,9 +49,9 @@ const Login =  () => {
         type={"password"}
         className={classes.password_textfield}
       />
-      <Link to="/boots" style={{ textDecoration: 'none' }}>
+      
       <Button onClick={makePostRequestForLogin} variant="contained" className={classes.login_button}>Login</Button>
-      </Link>
+      
       <Divider className={classes.divider_right}/>
       <Typography className={classes.or_text}>or</Typography>
       <Divider className={classes.divider_left}/>
@@ -50,6 +60,7 @@ const Login =  () => {
       <Button variant="contained" className={classes.sign_up_button}>Sign up</Button>
       </Link>
       <Typography className={classes.policy_text}>This site is protected by reCAPTCHA and the google <span className={classes.policy_text_blue}>Privacy Policy</span> and the <span className={classes.policy_text_blue}> Terms of Service </span>apply</Typography> 
+    <p className={classes.error_text}>{errorMessage}</p>
     </Box>
     </Box>
    );

@@ -11,5 +11,6 @@ public class UserUpdateRequest {
     private String email;
     private String gender;
     private Integer age;
-    private String password;
+    private String oldPassword;
+    private String newPassword;
 }

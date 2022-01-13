@@ -33,7 +33,7 @@ public class FootballBootsService {
         return this.footballBootsRepository.findAll();
     }
 
-    public List<FootballBoots> getAllFootballBootsWithFilter(String search, String search2) {
+    public List<FootballBoots> getAllFootballBootsWithFilter(String search, String search2, String order) {
 
         Set<FootballBoots> footballBootsSetFromSearchOne = new HashSet<>();
         Set<FootballBoots> footballBootsSetFromSearchTwo = new HashSet<>();
@@ -65,7 +65,8 @@ public class FootballBootsService {
             footballBootsAttributes.stream().forEach(attribute -> footballBootsSetFromSearchTwo.add(this.footballBootsRepository.findById(attribute.getFootballBootsSet().get(0).getId()).get()));
         }
         footballBootsSetFromSearchOne.retainAll(footballBootsSetFromSearchTwo);
-        return new ArrayList<>(footballBootsSetFromSearchOne);
+        List<FootballBoots> footballBoots = new ArrayList<>(footballBootsSetFromSearchOne);
+        return footballBoots;
     }
 
     public FootballBoots createFootballBoots(FootballBoots footballBoots) {

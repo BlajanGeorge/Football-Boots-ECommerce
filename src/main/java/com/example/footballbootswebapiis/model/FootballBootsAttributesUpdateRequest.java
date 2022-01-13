@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FootballBootsAttributesUpdateRequest {
-    private Float price;
+    private Integer price;
     private Integer quantity;
 }

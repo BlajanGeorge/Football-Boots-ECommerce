@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @Validated
+@CrossOrigin
 @RequestMapping("/boots")
 public class FootballBootsController {
     private FootballBootsService footballBootsService;
@@ -25,7 +26,6 @@ public class FootballBootsController {
         this.footballBootsService = footballBootsService;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<FootballBootsDefaultSizeResponse>> getAllFootballBoots() {
         return new ResponseEntity<>(FootballBootsMapper.mapFromDefaultResponseToArrayResponse(this.footballBootsService.getFootballBoots()), HttpStatus.OK);
@@ -33,12 +33,12 @@ public class FootballBootsController {
 
     @GetMapping("/filter")
     public ResponseEntity<List<FootballBootsDefaultSizeResponse>> getAllFootballBootsWithFilter(@RequestParam(value = "search", required = false) String search,
-                                                                                                @RequestParam(value = "search2", required = false) String search2)
+                                                                                                @RequestParam(value = "search2", required = false) String search2,
+                                                                                                @RequestParam(value = "order", required = false) String order)
     {
-        return new ResponseEntity<>(FootballBootsMapper.mapFromDefaultResponseToArrayResponse(this.footballBootsService.getAllFootballBootsWithFilter(search, search2)), HttpStatus.OK);
+        return new ResponseEntity<>(FootballBootsMapper.mapFromDefaultResponseToArrayResponse(this.footballBootsService.getAllFootballBootsWithFilter(search, search2, order)), HttpStatus.OK);
     }
 
-    @CrossOrigin
     @GetMapping("/{id}/{size}")
     public ResponseEntity<FootballBootsDefaultSizeResponse> getFootballBootsByIdAndSize(@PathVariable @Min(value = 1, message = "Id can't be negative.") int id,
                                                                                         @PathVariable @Range(min = 35, max = 45, message = "Boots size must be between 35 and 45.") int size) {

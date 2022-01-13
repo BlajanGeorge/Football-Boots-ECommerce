@@ -11,13 +11,77 @@ const SignUp =  () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
+    const [gender, setGender] = useState('M');
+    const [errorFirstName, setErrorFirstName] = useState('')
+    const [errorLastName, setErrorLastName] = useState('')
+    const [errorGender, setErrorGender] = useState('')
+    const [errorEmail, setErrorEmail] = useState('')
+    const [errorPassword, setErrorPassword] = useState('')
+    const [errorAge, setErrorAge] = useState('')
 
     async function makePostRequestForSignUp() {
-      const res = await axios.post('http://localhost:10000/users/registration/customer', {firstName, lastName, email, gender, age, password});
-      if(res.status == 200){
-          console.log(res.data)
-      }
+      const res = await axios.post('http://localhost:10000/users/registration/customer', {firstName, lastName, email, gender, age, password})
+      .then(function(res){
+        window.location.replace('http://localhost:3000/login')
+    })
+    .catch(function (error) {
+        if (error.response) {
+          if(error.response.data.message.includes('First'))
+          {
+            setErrorFirstName(error.response.data.message)
+            setErrorLastName('')
+            setErrorAge('')
+            setErrorEmail('')
+            setErrorPassword('');
+            setErrorGender('')
+          }
+          if(error.response.data.message.includes('Last'))
+          {
+            setErrorFirstName('')
+            setErrorLastName(error.response.data.message)
+            setErrorAge('')
+            setErrorEmail('')
+            setErrorPassword('');
+            setErrorGender('')
+          }
+          if(error.response.data.message.includes('Age'))
+          {
+            setErrorFirstName('')
+            setErrorLastName('')
+            setErrorPassword('')
+            setErrorEmail('')
+            setErrorAge(error.response.data.message);
+            setErrorGender('')
+          }
+          if(error.response.data.message.includes('gender'))
+          {
+            setErrorFirstName('')
+            setErrorLastName('')
+            setErrorAge('')
+            setErrorEmail('')
+            setErrorPassword('');
+            setErrorGender(error.response.data.message)
+          }
+          if(error.response.data.message.includes('email'))
+          {
+            setErrorFirstName('')
+            setErrorLastName('')
+            setErrorAge('')
+            setErrorEmail(error.response.data.message)
+            setErrorPassword('');
+            setErrorGender('')
+          }
+          if(error.response.data.message.includes('Password'))
+          {
+            setErrorFirstName('')
+            setErrorLastName('')
+            setErrorAge('')
+            setErrorEmail('')
+            setErrorPassword(error.response.data.message);
+            setErrorGender('')
+          }
+        }
+    })
   }
 
    return (  
@@ -64,8 +128,10 @@ const SignUp =  () => {
       disablePortal
       id="combo-box-demo"
       options={options}
+      value={gender}
+      defaultValue={gender}
       className={classes.gender_combobox}
-      renderInput={(params) => <TextField {...params} label="M" size={"small"} />}
+      renderInput={(params) => <TextField {...params} size={"small"} />}
 />
       <Typography className={classes.password_text}>Password</Typography>
       <TextField
@@ -76,8 +142,14 @@ const SignUp =  () => {
         type={"password"}
         className={classes.password_textfield}
       />
-      <Button onClick={makePostRequestForSignUp} variant="contained" href="#contained-buttons" className={classes.create_account_button}>Create Account</Button>
+      <Button onClick={makePostRequestForSignUp} variant="contained" className={classes.create_account_button}>Create Account</Button>
       <Typography className={classes.policy_text}>This site is protected by reCAPTCHA and the google <span className={classes.policy_text_blue}>Privacy Policy</span> and the <span className={classes.policy_text_blue}> Terms of Service </span>apply</Typography>
+      <p className={classes.firstname_error_text}>{errorFirstName}</p>
+      <p className={classes.lastname_error_text}>{errorLastName}</p>
+      <p className={classes.age_error_text}>{errorAge}</p>
+      <p className={classes.email_error_text}>{errorEmail}</p>
+      <p className={classes.password_error_text}>{errorPassword}</p>
+      <p className={classes.gender_error_text}>{errorGender}</p>
     </Box>
     </Box>
    );

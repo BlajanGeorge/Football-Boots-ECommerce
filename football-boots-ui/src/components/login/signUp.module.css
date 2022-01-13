@@ -142,6 +142,75 @@
     color: #000000;
 }
 
+.lastname_error_text{
+    position: absolute;
+    color: rgb(201, 15, 15);
+    font-size: 40px;
+    left:700px;
+    top:700px;
+    width:820px;
+    font-family: Roboto Slab !important;
+    text-decoration: underline;
+}
+
+.firstname_error_text{
+    position: absolute;
+    color: rgb(201, 15, 15);
+    font-size: 40px;
+    left:700px;
+    top:700px;
+    width:820px;
+    font-family: Roboto Slab !important;
+    text-decoration: underline;
+}
+
+.age_error_text{
+    position: absolute;
+    color: rgb(201, 15, 15);
+    font-size: 30px;
+    left:650px;
+    top:720px;
+    width:820px;
+    font-family: Roboto Slab !important;
+    text-decoration: underline;
+}
+
+.gender_error_text{
+    position: absolute;
+    color: rgb(201, 15, 15);
+    font-size: 40px;
+    left:730px;
+    top:700px;
+    width:820px;
+    font-family: Roboto Slab !important;
+    text-decoration: underline;
+}
+
+
+.email_error_text{
+    position: absolute;
+    color: rgb(201, 15, 15);
+    font-size: 40px;
+    left:750px;
+    top:700px;
+    width:820px;
+    font-family: Roboto Slab !important;
+    text-decoration: underline;
+}
+
+.password_error_text{
+    position: absolute;
+    color: rgb(201, 15, 15);
+    font-size: 20px;
+    left:650px;
+    top:730px;
+    width:620px;
+    font-family: Roboto Slab !important;
+    text-decoration: underline;
+}
+
+
+
 .gender_combobox{
     position: absolute;
     left: 970px;

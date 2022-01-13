@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 @Validated
 public class UserController {
     private UserService userService;
@@ -62,17 +63,15 @@ public class UserController {
         }
     }
 
-    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody UserLoginRequest userLoginRequest) {
         try {
             return new ResponseEntity(this.userService.login(userLoginRequest), HttpStatus.OK);
         } catch (BadCredentialsException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @CrossOrigin
     @PostMapping("/registration/customer")
     public ResponseEntity<User> createCustomer(@RequestBody @Valid UserCreateRequest userCreateRequest) {
         return new ResponseEntity<>(this.userService.createUser(UserMapper.mapUserCreateRequestToUser(userCreateRequest, Role.CUSTOMER)), HttpStatus.OK);
@@ -83,7 +82,6 @@ public class UserController {
         return new ResponseEntity<>(this.userService.createUser(UserMapper.mapUserCreateRequestToUser(userCreateRequest, Role.ADMIN)), HttpStatus.OK);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity updateUserById(@RequestBody UserUpdateRequest userUpdateRequest, @PathVariable @Min(value = 1, message = "id must be positive.") int id) {
         try {
@@ -91,5 +89,11 @@ public class UserController {
         } catch (EntityNotFoundException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/order/{email}")
+    public ResponseEntity sendEmail(@PathVariable String email) {
+        this.userService.sendEmailForOrder(email);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

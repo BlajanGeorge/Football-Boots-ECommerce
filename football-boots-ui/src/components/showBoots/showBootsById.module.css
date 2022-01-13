@@ -1,0 +1,95 @@
+.box_for_render_boots{
+    position: absolute;
+    width: 1200px;
+    height:700px;
+    border-radius: 8px;
+    top:200px;
+    left:275px;
+    background-color: white;
+    border: 5px solid black;
+}
+
+.name{
+    position: absolute !important;
+    font-size: 50px !important;
+    left: 650px !important;
+    top:75px !important;
+}
+
+.size{
+    position: absolute !important;
+    top:175px !important;
+    left: 740px !important;
+    font-size: 30px !important;
+}
+
+.size_value{
+    position: absolute !important;
+    top: 176px !important;
+    left: 830px !important;
+    font-size: 30px !important;
+}
+
+.stock{
+    position: absolute !important;
+    top: 225px !important;
+    left: 724px !important;
+    font-size: 30px !important;
+}
+
+.stock_value{
+    position: absolute !important;
+    top: 225px !important;
+    left: 830px !important;
+    font-size: 30px !important;
+}
+
+.price {
+    position: absolute !important;
+    top: 275px !important;
+    left: 730px !important;
+    font-size: 30px !important;
+}
+
+.price_value{
+    position: absolute !important;
+    top: 275px !important;
+    left: 830px !important;
+    font-size: 30px !important;
+}
+
+.description{
+    position: absolute !important;
+    top: 325px !important;
+    left: 650px !important;
+    font-size: 30px !important;
+}
+
+.description_value{
+    position: absolute !important;
+    top: 335px !important;
+    left: 830px !important;
+    font-size: 20px !important;
+}
+
+.select_filter{
+    position: absolute !important;
+    width: 200px !important;
+    top: 395px !important;
+    left: 720px !important;
+}
+
+.add_to_bag{
+    position: absolute !important;
+    width: 200px !important;
+    margin-top:465px !important;
+    margin-left: 720px !important;
+    background-color: black !important;
+    color: white !important;
+}
+
+.image_box{
+    position: absolute;
+    height: 700px;
+    width: 600px;
+}
