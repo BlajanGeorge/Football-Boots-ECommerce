@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Button, Box, FormControlLabel, Switch, AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Checkbox, TextField, Slider, Select, FormControl, InputLabel, Autocomplete, Card, TabScrollButton, createMuiTheme } from '@mui/material'
+import { Button, Box, AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from '@mui/material'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeIcon from '@mui/icons-material/Home';
@@ -12,9 +12,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 export const Basket = () => {
 
@@ -149,7 +147,7 @@ export const Basket = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {basket.map((row) => (
+          {basket.map((row: any) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -166,7 +164,7 @@ export const Basket = () => {
       </Table>
     </TableContainer>
     </Box>
-    {basket.map((row) => (
+    {basket.map((row: any) => (
      <IconButton key={row.idBasket} sx={{display:'grid', marginLeft:'1210px', transform:'translate(0,270px)', marginTop:'40px'}} onClick={handleDeleteFromBasket(row.idBasket)}><RemoveCircle/></IconButton>
     ))}
     <Button onClick={order} sx={{position:'absolute', width:'200px', backgroundColor:'black', borderRadius:'8px', color:'white', marginLeft:'770px', marginTop:'-200px'}}>Checkout</Button>

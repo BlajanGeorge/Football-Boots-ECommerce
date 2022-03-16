@@ -17,7 +17,13 @@ const Login =  () => {
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('userId', res.data.id)
             localStorage.setItem('userEmail', email)
+            if(res.data.admin == false){
             window.location.replace('http://localhost:3000/boots')
+            }
+            else
+            {
+              window.location.replace('http://localhost:3000/adminConsole')
+            }
         }
         )
         .catch(function (error) {

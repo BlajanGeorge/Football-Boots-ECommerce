@@ -5,12 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class UserLoginResponse {
-    private int id;
-    private String token;
-    private boolean isAdmin;
+@NoArgsConstructor
+@AllArgsConstructor
+public class FootbalBootsAttributesCreateResponse {
+    private Integer size;
+    private Integer price;
+    private Integer quantity;
 }

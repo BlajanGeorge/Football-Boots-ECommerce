@@ -22,7 +22,7 @@ public class EmailSender {
         props.put("mail.smtp.starttls.required", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-        final String username = "letuscodeforyou@gmail.com";
+        final String username = "georgeblajan@yahoo.com";
         final String password = "pocpitacuunsore";
         Session session = Session.getDefaultInstance(props,
                 new Authenticator() {

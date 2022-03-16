@@ -51,7 +51,7 @@ public class FootballBootsController {
     }
 
     @PostMapping
-    public ResponseEntity<FootballBoots> createFootballBoots(@RequestBody @Valid FootballBootsCreateRequest footballBootsCreateRequest) {
+    public ResponseEntity<FootballBootsCreateResponse> createFootballBoots(@RequestBody @Valid FootballBootsCreateRequest footballBootsCreateRequest) {
         return new ResponseEntity<>
                 (this.footballBootsService.createFootballBoots(FootballBootsMapper.mapFromCreateRequestToModel(footballBootsCreateRequest)),
                         HttpStatus.OK);

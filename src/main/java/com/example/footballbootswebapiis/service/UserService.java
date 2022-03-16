@@ -3,7 +3,6 @@ package com.example.footballbootswebapiis.service;
 import com.example.footballbootswebapiis.customvalidators.EmailValidator;
 import com.example.footballbootswebapiis.customvalidators.GenderValidator;
 import com.example.footballbootswebapiis.customvalidators.PasswordValidator;
-import com.example.footballbootswebapiis.enumlayer.Role;
 import com.example.footballbootswebapiis.exceptions.BadCredentialsException;
 import com.example.footballbootswebapiis.mail.EmailSender;
 import com.example.footballbootswebapiis.mappers.UserMapper;
@@ -53,7 +52,7 @@ public class UserService {
         Optional<User> userOptional = this.userRepository.findByEmail(userLoginRequest.getEmail());
         if (userOptional.isPresent()) {
             if (bCryptPasswordEncoder.matches(userLoginRequest.getPassword(), userOptional.get().getPassword())) {
-                return new UserLoginResponse(userOptional.get().getId(), tokenService.getJWTToken(userOptional.get().getFirstName(), userOptional.get().getRole()));
+                return new UserLoginResponse(userOptional.get().getId(), tokenService.getJWTToken(userOptional.get().getFirstName(), userOptional.get().getRole()), userOptional.get().getRole().name().equals("ADMIN"));
             } else {
                 throw new BadCredentialsException("Incorrect email/password!");
             }
@@ -104,10 +103,8 @@ public class UserService {
         if (user.getAge() != null && user.getAge() >= 14 && user.getAge() <= 120) {
             oldUser.setAge(user.getAge());
         }
-        System.out.println("dada");
         if (!StringUtils.isBlank(user.getNewPassword()) && PasswordValidator.isValid(user.getNewPassword())) {
             if (bCryptPasswordEncoder.matches(user.getOldPassword(), oldUser.getPassword())) {
-                System.out.println("da");
                 oldUser.setPassword(bCryptPasswordEncoder.encode(user.getNewPassword()));
             }
         }

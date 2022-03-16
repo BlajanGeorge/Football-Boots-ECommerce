@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.users_container{
+    position: absolute;
+    background-color: #1976d2;
+    border-radius: 8px;
+    width: 300px;
+    height: 200px;
+    margin-top: 300px;
+    margin-left: 250px;
+}
+
+.boots_container{
+    position: absolute;
+    background-color: #1976d2;
+    border-radius: 8px;
+    width: 300px;
+    height: 200px;
+    margin-top: 300px;
+    margin-left: 750px;
+}
+
+.basket_container{
+    position: absolute;
+    background-color: #1976d2;
+    border-radius: 8px;
+    width: 300px;
+    height: 200px;
+    margin-top: 300px;
+    margin-left: 1250px;
+}
+
+.title{
+    position: absolute;
+    color: white;
+    font-size: 40px !important; 
+    font-family: 'Roboto', sans-serif !important;
+    margin-left: 90px !important;
+    margin-top: 40px !important;
+}
+
+.basket_title{
+    position: absolute; 
+    color: white;
+    font-size: 40px !important;
+    font-family: 'Roboto', sans-serif !important;
+    margin-left: 80px !important;
+    margin-top: 40px !important;
+}

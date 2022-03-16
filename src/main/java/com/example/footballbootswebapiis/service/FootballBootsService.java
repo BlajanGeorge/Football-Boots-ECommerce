@@ -2,10 +2,8 @@ package com.example.footballbootswebapiis.service;
 
 import com.example.footballbootswebapiis.enumlayer.Brand;
 import com.example.footballbootswebapiis.exceptions.EntityNotFoundException;
-import com.example.footballbootswebapiis.model.FootballBoots;
-import com.example.footballbootswebapiis.model.FootballBootsAttributes;
-import com.example.footballbootswebapiis.model.FootballBootsAttributesUpdateRequest;
-import com.example.footballbootswebapiis.model.FootballBootsUpdateRequest;
+import com.example.footballbootswebapiis.mappers.FootballBootsMapper;
+import com.example.footballbootswebapiis.model.*;
 import com.example.footballbootswebapiis.repository.FootballBootsAttributesRepository;
 import com.example.footballbootswebapiis.repository.FootballBootsRepository;
 import com.example.footballbootswebapiis.searchapi.FootballBootsAttributesSpecificationBuilder;
@@ -69,13 +67,13 @@ public class FootballBootsService {
         return footballBoots;
     }
 
-    public FootballBoots createFootballBoots(FootballBoots footballBoots) {
+    public FootballBootsCreateResponse createFootballBoots(FootballBoots footballBoots) {
         footballBoots.getFootballBootsAttributesList().forEach(attribute ->
         {
             FootballBootsAttributes footballBootsAttributes = this.footballBootsAttributesRepository.save(attribute);
             footballBootsAttributes.getFootballBootsSet().add(footballBoots);
         });
-        return this.footballBootsRepository.save(footballBoots);
+        return FootballBootsMapper.mapFromModelToCreateResponse(this.footballBootsRepository.save(footballBoots));
     }
 
     public void deleteFootballBootsById(int id) {

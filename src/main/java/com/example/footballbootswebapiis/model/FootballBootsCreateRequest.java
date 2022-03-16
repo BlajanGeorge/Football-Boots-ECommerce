@@ -1,6 +1,5 @@
 package com.example.footballbootswebapiis.model;
 
-import com.example.footballbootswebapiis.enumlayer.Brand;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.validation.annotation.Validated;

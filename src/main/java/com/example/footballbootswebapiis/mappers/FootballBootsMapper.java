@@ -60,4 +60,15 @@ public class FootballBootsMapper {
         footballBoots.getFootballBootsAttributesList().forEach(atttribute -> footballBootsAttributesUpdateResponseList.add(FootballBootsMapper.mapFromAttributesModelToUpdateResponse(atttribute)));
         return new FootballBootsUpdateResponse(footballBoots.getId(), footballBoots.getName(), footballBoots.getDescription(), footballBoots.getBrand().name(), footballBootsAttributesUpdateResponseList);
     }
+
+    public static FootballBootsCreateResponse mapFromModelToCreateResponse(FootballBoots footballBoots) {
+        List<FootbalBootsAttributesCreateResponse> footballBootsAttributesCreateResponseList = new ArrayList<>();
+        footballBoots.getFootballBootsAttributesList().forEach(attribute -> footballBootsAttributesCreateResponseList.add(FootballBootsMapper.mapFromModelAttributesToCreateResponse(attribute)));
+        return new FootballBootsCreateResponse(footballBoots.getName(), footballBoots.getDescription(), footballBoots.getBrand(), footballBoots.getPhotoPath(), footballBoots.getBigPhotoPath(), footballBootsAttributesCreateResponseList);
+    }
+
+    public static FootbalBootsAttributesCreateResponse mapFromModelAttributesToCreateResponse(FootballBootsAttributes footballBootsAttributes) {
+        return new FootbalBootsAttributesCreateResponse(footballBootsAttributes.getSize(), footballBootsAttributes.getPrice(),
+                footballBootsAttributes.getQuantity());
+    }
 }
