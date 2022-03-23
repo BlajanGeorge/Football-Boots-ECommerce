@@ -22,7 +22,7 @@ public class EmailSender {
         props.put("mail.smtp.starttls.required", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-        final String username = "georgeblajan@yahoo.com";
+        final String username = "letuscodeforyou@gmail.com";
         final String password = "pocpitacuunsore";
         Session session = Session.getDefaultInstance(props,
                 new Authenticator() {
@@ -81,7 +81,7 @@ public class EmailSender {
                 Message.RecipientType.TO, InternetAddress.parse(to));
         message.setSubject(subject);
 
-        String msg = String.format("Order was processed, thank you!");
+        String msg = "Order was processed, thank you!";
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(msg, "text/html; charset=utf-8");

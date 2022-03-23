@@ -20,9 +20,9 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/boots")
 public class FootballBootsController {
-    private FootballBootsService footballBootsService;
+    private final FootballBootsService footballBootsService;
 
-    public FootballBootsController(FootballBootsService footballBootsService) {
+    public FootballBootsController(final FootballBootsService footballBootsService) {
         this.footballBootsService = footballBootsService;
     }
 
@@ -43,11 +43,7 @@ public class FootballBootsController {
     public ResponseEntity<FootballBootsDefaultSizeResponse> getFootballBootsByIdAndSize(@PathVariable @Min(value = 1, message = "Id can't be negative.") int id,
                                                                                         @PathVariable @Range(min = 35, max = 45, message = "Boots size must be between 35 and 45.") int size) {
         Optional<FootballBoots> footballBootsOptional = this.footballBootsService.getBootsById(id);
-        if (footballBootsOptional.isPresent()) {
-            return new ResponseEntity<>(FootballBootsMapper.mapFromModelToSizeResponse(footballBootsOptional.get(), size), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+        return footballBootsOptional.map(footballBoots -> new ResponseEntity<>(FootballBootsMapper.mapFromModelToSizeResponse(footballBoots, size), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @PostMapping

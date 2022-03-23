@@ -4,12 +4,10 @@ import com.example.footballbootswebapiis.customvalidators.EmailValidator;
 import com.example.footballbootswebapiis.customvalidators.GenderValidator;
 import com.example.footballbootswebapiis.customvalidators.PasswordValidator;
 import com.example.footballbootswebapiis.exceptions.BadCredentialsException;
+import com.example.footballbootswebapiis.exceptions.EntityNotFoundException;
 import com.example.footballbootswebapiis.mail.EmailSender;
 import com.example.footballbootswebapiis.mappers.UserMapper;
-import com.example.footballbootswebapiis.model.User;
-import com.example.footballbootswebapiis.model.UserLoginRequest;
-import com.example.footballbootswebapiis.model.UserLoginResponse;
-import com.example.footballbootswebapiis.model.UserUpdateRequest;
+import com.example.footballbootswebapiis.model.*;
 import com.example.footballbootswebapiis.repository.UserRepository;
 import com.example.footballbootswebapiis.security.TokenService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.footballbootswebapiis.exceptions.EntityNotFoundException;
-
 import javax.mail.MessagingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,30 +26,39 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TokenService tokenService;
+    private final BasketService basketService;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenService tokenService) {
+    public UserService(final UserRepository userRepository, final BCryptPasswordEncoder bCryptPasswordEncoder, final TokenService tokenService, final BasketService basketService) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.tokenService = tokenService;
+        this.basketService = basketService;
     }
 
-    public List<User> getUsers() {
-        return this.userRepository.findAll();
+    public List<UserResponse> getUsers() {
+        List<UserResponse> userResponses = new ArrayList<>();
+        for (User user : this.userRepository.findAll()) {
+            userResponses.add(UserMapper.mapFromUserModelToUserResponse(user));
+        }
+        return userResponses;
     }
 
-    public Optional<User> getUserById(int id) {
-        return this.userRepository.findById(id);
+    public Optional<UserResponse> getUserById(int id) {
+        Optional<User> userOptional = this.userRepository.findById(id);
+        return userOptional.map(UserMapper::mapFromUserModelToUserResponse);
     }
 
-    public Optional<User> getUserByEmail(String email) {
-        return this.userRepository.findByEmail(email);
+    public Optional<UserResponse> getUserByEmail(String email) {
+        Optional<User> userOptional = this.userRepository.findByEmail(email);
+        return userOptional.map(UserMapper::mapFromUserModelToUserResponse);
     }
 
     public UserLoginResponse login(UserLoginRequest userLoginRequest) {
         Optional<User> userOptional = this.userRepository.findByEmail(userLoginRequest.getEmail());
         if (userOptional.isPresent()) {
-            if (bCryptPasswordEncoder.matches(userLoginRequest.getPassword(), userOptional.get().getPassword())) {
-                return new UserLoginResponse(userOptional.get().getId(), tokenService.getJWTToken(userOptional.get().getFirstName(), userOptional.get().getRole()), userOptional.get().getRole().name().equals("ADMIN"));
+            User user = userOptional.get();
+            if (bCryptPasswordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
+                return UserMapper.mapFromModelToUserLoginResponse(user, tokenService.getJWTToken(user.getFirstName(), user.getRole()));
             } else {
                 throw new BadCredentialsException("Incorrect email/password!");
             }
@@ -61,7 +67,7 @@ public class UserService {
         }
     }
 
-    public User createUser(User user) {
+    public UserResponse createUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         try {
             EmailSender.sendEmail(user.getEmail(), "georgeblajan@yahoo.com", "Welcome", user.getFirstName());
@@ -69,7 +75,7 @@ public class UserService {
             e.printStackTrace();
             log.error("Failed to send the email.");
         }
-        return this.userRepository.save(user);
+        return UserMapper.mapFromUserModelToUserResponse(this.userRepository.save(user));
     }
 
     public void sendEmailForOrder(String email) {
@@ -84,10 +90,16 @@ public class UserService {
     public void deleteUserById(int id) {
         Optional<User> optionalUser = this.userRepository.findById(id);
         optionalUser.orElseThrow(() -> new EntityNotFoundException(String.format("User with id %d doesn't exist.", id)));
+        List<Basket> baskets = this.basketService.getAll();
+        for (Basket basket : baskets) {
+            if (basket.getIdUser() == id) {
+                this.basketService.deleteEntryById(basket.getIdBasket());
+            }
+        }
         this.userRepository.deleteById(id);
     }
 
-    public User updateUser(int id, UserUpdateRequest user) {
+    public UserResponse updateUser(int id, UserUpdateRequest user) {
         Optional<User> optionalUser = this.userRepository.findById(id);
         User oldUser = optionalUser.orElseThrow(() -> new EntityNotFoundException(String.format("User with id %d doesn't exist.", id)));
 
@@ -112,7 +124,7 @@ public class UserService {
             oldUser.setEmail(user.getEmail());
         }
 
-        return this.userRepository.save(oldUser);
+        return UserMapper.mapFromUserModelToUserResponse(this.userRepository.save(oldUser));
     }
 
 }

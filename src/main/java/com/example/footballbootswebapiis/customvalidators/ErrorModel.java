@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 
 public class ErrorModel {
 
-    private HttpStatus httpStatus;
+    private final HttpStatus httpStatus;
 
-    private String message;
+    private final String message;
 
     public ErrorModel(HttpStatus httpStatus, String message) {
         this.httpStatus = httpStatus;

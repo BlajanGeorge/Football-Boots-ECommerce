@@ -4,6 +4,7 @@ import com.example.footballbootswebapiis.enumlayer.Brand;
 import com.example.footballbootswebapiis.exceptions.EntityNotFoundException;
 import com.example.footballbootswebapiis.mappers.FootballBootsMapper;
 import com.example.footballbootswebapiis.model.*;
+import com.example.footballbootswebapiis.repository.BasketRepository;
 import com.example.footballbootswebapiis.repository.FootballBootsAttributesRepository;
 import com.example.footballbootswebapiis.repository.FootballBootsRepository;
 import com.example.footballbootswebapiis.searchapi.FootballBootsAttributesSpecificationBuilder;
@@ -19,12 +20,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class FootballBootsService {
-    private FootballBootsRepository footballBootsRepository;
-    private FootballBootsAttributesRepository footballBootsAttributesRepository;
+    private final FootballBootsRepository footballBootsRepository;
+    private final FootballBootsAttributesRepository footballBootsAttributesRepository;
+    private final BasketService basketService;
 
-    public FootballBootsService(FootballBootsRepository footballBootsRepository, FootballBootsAttributesRepository footballBootsAttributesRepository) {
+    public FootballBootsService(final FootballBootsRepository footballBootsRepository, final FootballBootsAttributesRepository footballBootsAttributesRepository, final BasketService basketService) {
         this.footballBootsAttributesRepository = footballBootsAttributesRepository;
         this.footballBootsRepository = footballBootsRepository;
+        this.basketService = basketService;
     }
 
     public List<FootballBoots> getFootballBoots() {
@@ -80,6 +83,12 @@ public class FootballBootsService {
         Optional<FootballBoots> footballBootsOptional = this.footballBootsRepository.findById(id);
         FootballBoots footballBoots = footballBootsOptional.orElseThrow(() -> new EntityNotFoundException(String.format("Footbal boots with id %d doesn't exist.", id)));
         footballBoots.getFootballBootsAttributesList().forEach(attribute -> this.footballBootsAttributesRepository.deleteById(attribute.getId()));
+        List<Basket> baskets = this.basketService.getAll();
+        for (Basket basket : baskets) {
+            if (basket.getIdBoots() == id) {
+                this.basketService.deleteEntryById(basket.getIdBasket());
+            }
+        }
         this.footballBootsRepository.deleteById(id);
     }
 

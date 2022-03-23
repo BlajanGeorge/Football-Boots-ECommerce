@@ -22,35 +22,27 @@ import java.util.Optional;
 @CrossOrigin
 @Validated
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(final UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserResponse>> getUsers() {
         return new ResponseEntity<>(this.userService.getUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable @Min(value = 1, message = "id must be positive.") int id) {
-        Optional<User> optionalUser = this.userService.getUserById(id);
-        if (optionalUser.isPresent()) {
-            return new ResponseEntity<>(optionalUser.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<UserResponse> getUserById(@PathVariable @Min(value = 1, message = "id must be positive.") int id) {
+        Optional<UserResponse> optionalUser = this.userService.getUserById(id);
+        return optionalUser.map(userResponse -> new ResponseEntity<>(userResponse, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable @NotBlank(message = "Email can't be blank") String email) {
-        Optional<User> optionalUser = this.userService.getUserByEmail(email);
-        if (optionalUser.isPresent()) {
-            return new ResponseEntity<>(optionalUser.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<UserResponse> getUserByEmail(@PathVariable @NotBlank(message = "Email can't be blank") String email) {
+        Optional<UserResponse> optionalUser = this.userService.getUserByEmail(email);
+        return optionalUser.map(userResponse -> new ResponseEntity<>(userResponse, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
@@ -73,12 +65,12 @@ public class UserController {
     }
 
     @PostMapping("/registration/customer")
-    public ResponseEntity<User> createCustomer(@RequestBody @Valid UserCreateRequest userCreateRequest) {
+    public ResponseEntity<UserResponse> createCustomer(@RequestBody @Valid UserCreateRequest userCreateRequest) {
         return new ResponseEntity<>(this.userService.createUser(UserMapper.mapUserCreateRequestToUser(userCreateRequest, Role.CUSTOMER)), HttpStatus.OK);
     }
 
     @PostMapping("/registration/admin")
-    public ResponseEntity<User> createAdmin(@RequestBody @Valid UserCreateRequest userCreateRequest) {
+    public ResponseEntity<UserResponse> createAdmin(@RequestBody @Valid UserCreateRequest userCreateRequest) {
         return new ResponseEntity<>(this.userService.createUser(UserMapper.mapUserCreateRequestToUser(userCreateRequest, Role.ADMIN)), HttpStatus.OK);
     }
 

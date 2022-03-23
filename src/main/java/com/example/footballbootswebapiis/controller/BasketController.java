@@ -1,6 +1,6 @@
 package com.example.footballbootswebapiis.controller;
 
-import com.example.footballbootswebapiis.model.Basket;
+import com.example.footballbootswebapiis.model.BasketResponse;
 import com.example.footballbootswebapiis.model.CreateBasketEntryRequest;
 import com.example.footballbootswebapiis.service.BasketService;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 @Validated
 public class BasketController {
 
-    private BasketService basketService;
+    private final BasketService basketService;
 
     public BasketController(BasketService basketService) {
         this.basketService = basketService;
@@ -37,7 +37,7 @@ public class BasketController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Basket>> getBasketByUserId(@PathVariable int id) {
+    public ResponseEntity<List<BasketResponse>> getBasketByUserId(@PathVariable int id) {
         return new ResponseEntity<>(this.basketService.getBasketByUserId(id), HttpStatus.OK);
     }
 
