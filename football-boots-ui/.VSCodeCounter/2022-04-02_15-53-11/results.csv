@@ -1,0 +1,24 @@
+"filename", "language", "TypeScript React", "CSS", "comment", "blank", "total"
+"/Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsole.module.css", "CSS", 0, 44, 0, 5, 49
+"/Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsole.tsx", "TypeScript React", 96, 0, 0, 6, 102
+"/Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsoleBasketCruds.tsx", "TypeScript React", 174, 0, 0, 16, 190
+"/Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsoleBootsCruds.tsx", "TypeScript React", 320, 0, 0, 21, 341
+"/Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsoleUsersCruds.tsx", "TypeScript React", 211, 0, 0, 21, 232
+"/Users/gblajan/School/IS/football-boots-ui/src/components/basket/basket.tsx", "TypeScript React", 162, 0, 0, 14, 176
+"/Users/gblajan/School/IS/football-boots-ui/src/components/done/done.tsx", "TypeScript React", 27, 0, 0, 5, 32
+"/Users/gblajan/School/IS/football-boots-ui/src/components/favorites/favorites.tsx", "TypeScript React", 141, 0, 0, 16, 157
+"/Users/gblajan/School/IS/football-boots-ui/src/components/loading/loading.tsx", "TypeScript React", 14, 0, 0, 2, 16
+"/Users/gblajan/School/IS/football-boots-ui/src/components/login/login.module.css", "CSS", 0, 188, 0, 37, 225
+"/Users/gblajan/School/IS/football-boots-ui/src/components/login/login.tsx", "TypeScript React", 68, 0, 0, 7, 75
+"/Users/gblajan/School/IS/football-boots-ui/src/components/login/signUp.module.css", "CSS", 0, 287, 0, 50, 337
+"/Users/gblajan/School/IS/football-boots-ui/src/components/login/signup.tsx", "TypeScript React", 152, 0, 0, 6, 158
+"/Users/gblajan/School/IS/football-boots-ui/src/components/order/order.tsx", "TypeScript React", 71, 0, 0, 8, 79
+"/Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/cardForShowBoots.tsx", "TypeScript React", 34, 0, 0, 5, 39
+"/Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/card_for_show.module.css", "CSS", 0, 62, 0, 4, 66
+"/Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/defaultboots.module.css", "CSS", 0, 257, 0, 40, 297
+"/Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/getAllDefaultBoots.tsx", "TypeScript React", 422, 0, 0, 41, 463
+"/Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/showBootsById.module.css", "CSS", 0, 83, 0, 12, 95
+"/Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/showBootsById.tsx", "TypeScript React", 241, 0, 0, 22, 263
+"/Users/gblajan/School/IS/football-boots-ui/src/components/userProfile/profile.module.css", "CSS", 0, 158, 0, 20, 178
+"/Users/gblajan/School/IS/football-boots-ui/src/components/userProfile/userProfile.tsx", "TypeScript React", 143, 0, 0, 13, 156
+"Total", "-", 2276, 1079, 0, 371, 3726

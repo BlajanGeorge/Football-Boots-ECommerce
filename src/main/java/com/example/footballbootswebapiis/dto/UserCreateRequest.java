@@ -1,4 +1,4 @@
-package com.example.footballbootswebapiis.model;
+package com.example.footballbootswebapiis.dto;
 
 import com.example.footballbootswebapiis.customvalidators.EmailConstraint;
 import com.example.footballbootswebapiis.customvalidators.GenderConstraint;

@@ -9,6 +9,8 @@ import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -36,6 +38,9 @@ public class User {
     @Column(nullable = false)
     @Convert(converter = RoleConverter.class)
     private Role role;
+    @Column
+    @OneToMany(mappedBy = "user")
+    private List<Favorites> favoritesList;
 
     public User(String firstName, String lastName, String email, String gender, int age, String password, Role role) {
         this.firstName = firstName;
@@ -45,5 +50,6 @@ public class User {
         this.age = age;
         this.password = password;
         this.role = role;
+        this.favoritesList = new ArrayList<>();
     }
 }

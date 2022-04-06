@@ -13,6 +13,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String ADMIN = "ADMIN";
+    private static final String CUSTOMER = "CUSTOMER";
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -26,20 +29,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/v2/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/users/registration/customer").permitAll()
                 .antMatchers("/users/login").permitAll()
-                .antMatchers(HttpMethod.GET, "/users/{id}").hasAnyRole("ADMIN", "CUSTOMER")
-                .antMatchers(HttpMethod.PUT, "/users/{id}").hasAnyRole("ADMIN", "CUSTOMER")
-                .antMatchers(HttpMethod.POST, "/basket/**").hasAnyRole("ADMIN", "CUSTOMER")
-                .antMatchers(HttpMethod.GET, "/users/order/{email}").hasAnyRole("ADMIN", "CUSTOMER")
-                .antMatchers("/users/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/boots").hasAnyRole("ADMIN", "CUSTOMER")
-                .antMatchers(HttpMethod.GET, "/boots/{id}/{size}").hasAnyRole("ADMIN", "CUSTOMER")
-                .antMatchers(HttpMethod.POST, "/boots").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/boots/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/boots/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/boots/{id}/{size}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "boots/filter").hasAnyRole("ADMIN", "CUSTOMER")
+                .antMatchers("/favorites").hasAnyRole(ADMIN, CUSTOMER)
+                .antMatchers("/favorites/**").hasAnyRole(ADMIN, CUSTOMER)
+                .antMatchers(HttpMethod.GET, "/users/{id}").hasAnyRole(ADMIN, CUSTOMER)
+                .antMatchers(HttpMethod.PUT, "/users/{id}").hasAnyRole(ADMIN, CUSTOMER)
+                .antMatchers(HttpMethod.POST, "/basket/**").hasAnyRole(ADMIN, CUSTOMER)
+                .antMatchers(HttpMethod.GET, "/users/order/{email}").hasAnyRole(ADMIN, CUSTOMER)
+                .antMatchers("/users/**").hasRole(ADMIN)
+                .antMatchers(HttpMethod.GET, "/boots").hasAnyRole(ADMIN, CUSTOMER)
+                .antMatchers(HttpMethod.GET, "/boots/{id}/{size}").hasAnyRole(ADMIN, CUSTOMER)
+                .antMatchers(HttpMethod.POST, "/boots").hasRole(ADMIN)
+                .antMatchers(HttpMethod.DELETE, "/boots/{id}").hasRole(ADMIN)
+                .antMatchers(HttpMethod.PUT, "/boots/{id}").hasRole(ADMIN)
+                .antMatchers(HttpMethod.PUT, "/boots/{id}/{size}").hasRole(ADMIN)
+                .antMatchers(HttpMethod.GET, "boots/filter").hasAnyRole(ADMIN, CUSTOMER)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

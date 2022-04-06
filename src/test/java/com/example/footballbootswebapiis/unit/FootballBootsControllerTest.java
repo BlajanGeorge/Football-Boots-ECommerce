@@ -1,11 +1,10 @@
 package com.example.footballbootswebapiis.unit;
 
 import com.example.footballbootswebapiis.controller.FootballBootsController;
+import com.example.footballbootswebapiis.dto.*;
 import com.example.footballbootswebapiis.enumlayer.Brand;
-import com.example.footballbootswebapiis.exceptions.EntityNotFoundException;
 import com.example.footballbootswebapiis.mappers.FootballBootsMapper;
 import com.example.footballbootswebapiis.model.*;
-import com.example.footballbootswebapiis.repository.FootballBootsRepository;
 import com.example.footballbootswebapiis.service.FootballBootsService;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,12 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -15,6 +15,7 @@ import { AdminConsole } from './components/adminConsole/adminConsole'
 import { AdminConsoleUsers } from './components/adminConsole/adminConsoleUsersCruds'
 import { AdminConsoleBoots } from './components/adminConsole/adminConsoleBootsCruds'
 import { AdminConsoleBasket } from './components/adminConsole/adminConsoleBasketCruds'
+import { Favorites } from './components/favorites/favorites'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
    <Route path="/adminConsole/boots" element={<AdminConsoleBoots/>}/>
    <Route path="/adminConsole/users" element={<AdminConsoleUsers/>}/>
    <Route path="/adminConsole/basket" element={<AdminConsoleBasket/>}/>
+   <Route path="/favorites" element={<Favorites/>}/>
    </Routes> 
    </BrowserRouter>
   )

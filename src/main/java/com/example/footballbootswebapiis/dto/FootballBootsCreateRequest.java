@@ -1,5 +1,6 @@
-package com.example.footballbootswebapiis.model;
+package com.example.footballbootswebapiis.dto;
 
+import com.example.footballbootswebapiis.dto.FootballBootsAttributesCreateRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.validation.annotation.Validated;

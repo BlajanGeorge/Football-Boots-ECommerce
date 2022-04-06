@@ -1,4 +1,4 @@
-package com.example.footballbootswebapiis.model;
+package com.example.footballbootswebapiis.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserLoginResponse {
-    private int id;
-    private String token;
-    private boolean isAdmin;
+public class FavoritesDto {
+    private int bootsId;
+    private int userId;
 }

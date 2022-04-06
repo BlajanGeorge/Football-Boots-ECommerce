@@ -1,7 +1,7 @@
 package com.example.footballbootswebapiis.mappers;
 
 import com.example.footballbootswebapiis.model.Basket;
-import com.example.footballbootswebapiis.model.BasketResponse;
+import com.example.footballbootswebapiis.dto.BasketResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Button, Box, FormControlLabel, Switch, AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Checkbox, TextField, Slider, Select, FormControl, InputLabel, Autocomplete, Card, TabScrollButton, createMuiTheme } from '@mui/material'
 import { FormGroup } from '@material-ui/core'
-import { AccountCircle } from '@mui/icons-material'
+import { AccountCircle, MaximizeRounded } from '@mui/icons-material'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeIcon from '@mui/icons-material/Home';
@@ -16,9 +16,12 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
     export default function MenuAppBar() {
         const [auth, setAuth] = React.useState(true);
         const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
         const [nikeCheck, setNikeCheck] = useState(true)
         const [pumaCheck, setPumaCheck] = useState(true)
         const [adidasCheck, setAdidasCheck] = useState(true)
+        const [brandArray, setBrandArray] = useState(['NIKE', 'PUMA', 'ADIDAS'])
+  
         const [size35Color , setSize35Color] = useState('white')
         const [size36Color , setSize36Color] = useState('white')
         const [size37Color , setSize37Color] = useState('white')
@@ -30,6 +33,7 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
         const [size43Color , setSize43Color] = useState('white')
         const [size44Color , setSize44Color] = useState('white')
         const [size45Color , setSize45Color] = useState('white')
+
         const [size35Checked, setSize35Checked] = useState(true)
         const [size36Checked, setSize36Checked] = useState(true)
         const [size37Checked, setSize37Checked] = useState(true)
@@ -41,6 +45,8 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
         const [size43Checked, setSize43Checked] = useState(true)
         const [size44Checked, setSize44Checked] = useState(true)
         const [size45Checked, setSize45Checked] = useState(true)
+        const [sizeArray, setSizeArray] = useState(['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'])
+
         const [priceFilter, setPriceFilter] = useState([0, 1000]);
         const [lowPriceField, setLowPriceField] = useState(0)
         const [highPriceField, setHighPriceField] = useState(1000)
@@ -71,10 +77,12 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           if(nikeCheck == true)
           {
             setNikeCheck(false);
+            brandArray.splice(brandArray.indexOf('NIKE'),1)
           }
           else
           {
             setNikeCheck(true);
+            brandArray.push('NIKE');
           }
         }
 
@@ -82,10 +90,12 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           if(pumaCheck == true)
           {
             setPumaCheck(false);
+            brandArray.splice(brandArray.indexOf('PUMA'),1)
           }
           else
           {
             setPumaCheck(true);
+            brandArray.push('PUMA');
           }
         }
 
@@ -93,10 +103,12 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           if(adidasCheck == true)
           {
             setAdidasCheck(false);
+            brandArray.splice(brandArray.indexOf('ADIDAS'),1)
           }
           else
           {
             setAdidasCheck(true);
+            brandArray.push('ADIDAS');
           }
         }
 
@@ -105,11 +117,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize35Checked(false);
             setSize35Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('35'),1)
           }
           else
           {
             setSize35Checked(true);
             setSize35Color('white');
+            sizeArray.push('35');
           }
         }
 
@@ -118,11 +132,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize36Checked(false);
             setSize36Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('36'),1)
           }
           else
           {
             setSize36Checked(true);
             setSize36Color('white');
+            sizeArray.push('36');
           }
         }
 
@@ -131,11 +147,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize37Checked(false);
             setSize37Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('37'),1)
           }
           else
           {
             setSize37Checked(true);
             setSize37Color('white');
+            sizeArray.push('37');
           }
         }
 
@@ -144,11 +162,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize38Checked(false);
             setSize38Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('38'),1)
           }
           else
           {
             setSize38Checked(true);
             setSize38Color('white');
+            sizeArray.push('38');
           }
         }
 
@@ -157,11 +177,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize39Checked(false);
             setSize39Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('39'),1)
           }
           else
           {
             setSize39Checked(true);
             setSize39Color('white');
+            sizeArray.push('39');
           }
         }
 
@@ -170,11 +192,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize40Checked(false);
             setSize40Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('40'),1)
           }
           else
           {
             setSize40Checked(true);
             setSize40Color('white');
+            sizeArray.push('40');
           }
         }
 
@@ -183,11 +207,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize41Checked(false);
             setSize41Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('41'),1)
           }
           else
           {
             setSize41Checked(true);
             setSize41Color('white');
+            sizeArray.push('41');
           }
         }
 
@@ -196,11 +222,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize42Checked(false);
             setSize42Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('42'),1)
           }
           else
           {
             setSize42Checked(true);
             setSize42Color('white');
+            sizeArray.push('42');
           }
         }
 
@@ -209,11 +237,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize43Checked(false);
             setSize43Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('43'),1)
           }
           else
           {
             setSize43Checked(true);
             setSize43Color('white');
+            sizeArray.push('43');
           }
         }
 
@@ -222,11 +252,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize44Checked(false);
             setSize44Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('44'),1)
           }
           else
           {
             setSize44Checked(true);
             setSize44Color('white');
+            sizeArray.push('44');
           }
         }
 
@@ -235,11 +267,13 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
           {
             setSize45Checked(false);
             setSize45Color('#1976d2');
+            sizeArray.splice(sizeArray.indexOf('45'),1)
           }
           else
           {
             setSize45Checked(true);
             setSize45Color('white');
+            sizeArray.push('45');
           }
         }
 
@@ -263,195 +297,29 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
 
       async function handleFilterRequest(){
         var defaulrUrl = 'http://localhost:10000/boots/filter'
-        var search1 = '?search='
-        var search2 = 'search2='
-        var order = 'order='
-        var firstSizeChecked = true
-        if(nikeCheck == true && adidasCheck == true && pumaCheck == true)
-        {
-          search1 = search1 + 'brand:nike,brand:adidas,brand:puma;&'
-        }
-        else
-        {
-          if(nikeCheck == true && adidasCheck == true)
+        var brand = '?brand='
+        var size = 'size='
+        var minPrice = 'minPrice='
+        var maxPrice = 'maxPrice='
+        var sort = "sorting="
+    
+        brand = brand + brandArray.join();
+        size = size + sizeArray.join();
+        minPrice = minPrice + lowPriceField
+        maxPrice = maxPrice + highPriceField
+
+          if(filterValue == 'The highest price')
           {
-            search1 = search1 + 'brand:nike,brand:adidas;&'
+            sort = sort + '0';
           }
-          else
+          if(filterValue == 'The lowest price')
           {
-            if(nikeCheck == true && pumaCheck == true)
-            {
-              search1 = search1 + 'brand:nike,brand:puma;&'
-            }
-            else
-            {
-              if(adidasCheck == true && pumaCheck == true)
-              {
-                search1 = search1 + 'brand:adidas,brand:puma;&'
-              }
-              else
-              {
-                if(nikeCheck == true)
-                {
-                  search1 = search1 + 'brand:nike;&'
-                }
-                else{
-                  if(adidasCheck == true)
-                  {
-                    search1 = search1 + 'brand:adidas;&'
-                  }
-                  else
-                  {
-                    if(pumaCheck == true)
-                    {
-                      search1 = search1 + 'brand:puma;&'
-                    }
-                    else
-                    {
-                      search1 = search1 + '&'
-                    }
-                  }
-                }
-              }
-            }
+            sort = sort + '1'
           }
-        }
-        if(size35Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:35;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size35Checked == true){
-          search2 = search2 + ',size:35:quantity>1'
-          }
-        }
-        if(size36Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:36;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size36Checked == true){
-          search2 = search2 + ',size:36:quantity>1'
-          }
-        }
-        if(size37Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:37;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size37Checked == true){
-          search2 = search2 + ',size:37:quantity>1'
-          }
-        }
-        if(size38Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:38;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size38Checked == true){
-          search2 = search2 + ',size:38:quantity>1'
-          }
-        }
-        if(size39Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:39;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size39Checked == true){
-          search2 = search2 + ',size:39:quantity>1'
-          }
-        }
-        if(size40Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:40;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size40Checked == true){
-          search2 = search2 + ',size:40:quantity>1'
-          }
-        }
-        if(size41Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:41;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size41Checked == true){
-          search2 = search2 + ',size:41:quantity>1'
-          }
-        }
-        if(size42Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:42;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size42Checked == true){
-          search2 = search2 + ',size:42:quantity>1'
-          }
-        }
-        if(size42Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:42;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size42Checked == true){
-          search2 = search2 + ',size:42:quantity>1'
-          }
-        }
-        if(size43Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:43;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size43Checked == true){
-          search2 = search2 + ',size:43:quantity>1'
-          }
-        }
-        if(size44Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:44;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size44Checked == true){
-          search2 = search2 + ',size:44:quantity>1'
-          }
-        }
-        if(size45Checked == true && firstSizeChecked == true)
-        {
-          search2 = search2 + 'size:45;quantity>1'
-          firstSizeChecked = false
-        }
-        else
-        {
-          if(size45Checked == true){
-          search2 = search2 + ',size:45:quantity>1'
-          }
-        }
-        search2 = search2 + ';'
-        search2 = search2 + 'price>' + lowPriceField + ';'
-        search2 = search2 + 'price<' + highPriceField + ';'
-        defaulrUrl = defaulrUrl + search1 + search2;
+        
+
+        defaulrUrl = defaulrUrl + brand + '&' + size + '&' + minPrice + '&' + maxPrice + '&' + sort
+
         const res = await axios.get(defaulrUrl, {
           headers: {
             authorization:'Bearer ' + localStorage.getItem('token') as string 
@@ -481,7 +349,9 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
         }
     }, [filterDisplayToggle]);
 
-
+    const handleFavorites = () => {
+      window.location.replace('http://localhost:3000/favorites')
+    }
 
     return (
 <Box sx={{ flexGrow: 1}}>
@@ -496,7 +366,7 @@ import { CreateCardsWithBoots } from './cardForShowBoots'
               onClick={handleHome}>
                     <HomeIcon/>
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={handleFavorites}>
                     <FavoriteIcon/>
                 </IconButton>
                 <IconButton color="inherit"

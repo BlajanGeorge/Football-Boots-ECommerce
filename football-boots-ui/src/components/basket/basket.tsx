@@ -52,8 +52,8 @@ export const Basket = () => {
       }
 
      const handleDeleteFromBasket = (id:number) => {
+       console.log("da")
        console.log(id)
-       console.log('du te n cacat')
      }
 
       async function getPrice(){
@@ -77,6 +77,10 @@ export const Basket = () => {
         window.location.replace('http://localhost:3000/basket')
       }
 
+      const handleFavorites = () => {
+        window.location.replace('http://localhost:3000/favorites')
+      }
+
       useEffect(() => {
         getBasketData()
         getPrice()
@@ -95,7 +99,7 @@ export const Basket = () => {
               onClick={handleHome}>
                     <HomeIcon/>
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={handleFavorites}>
                     <FavoriteIcon/>
                 </IconButton>
                 <IconButton color="inherit"
@@ -134,6 +138,9 @@ export const Basket = () => {
           )}
         </Toolbar>
       </AppBar>
+      { (totalPrice as unknown as Number) != 0 &&
+      <Button onClick={order} sx={{position:'absolute', width:'200px', backgroundColor:'black', borderRadius:'8px', color:'white', marginLeft:'770px', marginTop:'100px'}}>Checkout</Button>
+       }
       <ShoppingCartIcon sx={{position:'absolute', marginTop:'300px', fontSize:'300px', marginLeft:'75px', width:'300px'}}/>
       <ShoppingCartIcon sx={{position:'absolute', marginTop:'300px', fontSize:'300px', marginLeft:'1400px', width:'300px'}}/>
       <Box sx={{position:'absolute', marginTop:'200px', marginLeft:'550px', border:'2px black solid', borderRadius:'8px'}}>
@@ -164,10 +171,6 @@ export const Basket = () => {
       </Table>
     </TableContainer>
     </Box>
-    {basket.map((row: any) => (
-     <IconButton key={row.idBasket} sx={{display:'grid', marginLeft:'1210px', transform:'translate(0,270px)', marginTop:'40px'}} onClick={handleDeleteFromBasket(row.idBasket)}><RemoveCircle/></IconButton>
-    ))}
-    <Button onClick={order} sx={{position:'absolute', width:'200px', backgroundColor:'black', borderRadius:'8px', color:'white', marginLeft:'770px', marginTop:'-200px'}}>Checkout</Button>
-      </Box>
+          </Box>
     )
 }

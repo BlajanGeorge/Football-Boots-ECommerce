@@ -1,12 +1,16 @@
 package com.example.footballbootswebapiis.mappers;
 
+import com.example.footballbootswebapiis.dto.*;
 import com.example.footballbootswebapiis.enumlayer.Brand;
 import com.example.footballbootswebapiis.model.*;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FootballBootsMapper {
 
     public static FootballBoots mapFromCreateRequestToModel(FootballBootsCreateRequest footballBootsCreateRequest) {

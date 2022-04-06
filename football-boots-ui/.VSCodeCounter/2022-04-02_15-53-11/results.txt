@@ -1,0 +1,56 @@
+Date : 2022-04-02 15:53:11
+Directory : /Users/gblajan/School/IS/football-boots-ui/src/components
+Total : 22 files,  3355 codes, 0 comments, 371 blanks, all 3726 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| TypeScript React |         15 |      2,276 |          0 |        203 |      2,479 |
+| CSS              |          7 |      1,079 |          0 |        168 |      1,247 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                               | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                  |         22 |      3,355 |          0 |        371 |      3,726 |
+| adminConsole                                                                                       |          5 |        845 |          0 |         69 |        914 |
+| basket                                                                                             |          1 |        162 |          0 |         14 |        176 |
+| done                                                                                               |          1 |         27 |          0 |          5 |         32 |
+| favorites                                                                                          |          1 |        141 |          0 |         16 |        157 |
+| loading                                                                                            |          1 |         14 |          0 |          2 |         16 |
+| login                                                                                              |          4 |        695 |          0 |        100 |        795 |
+| order                                                                                              |          1 |         71 |          0 |          8 |         79 |
+| showBoots                                                                                          |          6 |      1,099 |          0 |        124 |      1,223 |
+| userProfile                                                                                        |          2 |        301 |          0 |         33 |        334 |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                           | language         | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| /Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsole.module.css     | CSS              |         44 |          0 |          5 |         49 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsole.tsx            | TypeScript React |         96 |          0 |          6 |        102 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsoleBasketCruds.tsx | TypeScript React |        174 |          0 |         16 |        190 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsoleBootsCruds.tsx  | TypeScript React |        320 |          0 |         21 |        341 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/adminConsole/adminConsoleUsersCruds.tsx  | TypeScript React |        211 |          0 |         21 |        232 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/basket/basket.tsx                        | TypeScript React |        162 |          0 |         14 |        176 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/done/done.tsx                            | TypeScript React |         27 |          0 |          5 |         32 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/favorites/favorites.tsx                  | TypeScript React |        141 |          0 |         16 |        157 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/loading/loading.tsx                      | TypeScript React |         14 |          0 |          2 |         16 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/login/login.module.css                   | CSS              |        188 |          0 |         37 |        225 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/login/login.tsx                          | TypeScript React |         68 |          0 |          7 |         75 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/login/signUp.module.css                  | CSS              |        287 |          0 |         50 |        337 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/login/signup.tsx                         | TypeScript React |        152 |          0 |          6 |        158 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/order/order.tsx                          | TypeScript React |         71 |          0 |          8 |         79 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/cardForShowBoots.tsx           | TypeScript React |         34 |          0 |          5 |         39 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/card_for_show.module.css       | CSS              |         62 |          0 |          4 |         66 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/defaultboots.module.css        | CSS              |        257 |          0 |         40 |        297 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/getAllDefaultBoots.tsx         | TypeScript React |        422 |          0 |         41 |        463 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/showBootsById.module.css       | CSS              |         83 |          0 |         12 |         95 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/showBoots/showBootsById.tsx              | TypeScript React |        241 |          0 |         22 |        263 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/userProfile/profile.module.css           | CSS              |        158 |          0 |         20 |        178 |
+| /Users/gblajan/School/IS/football-boots-ui/src/components/userProfile/userProfile.tsx              | TypeScript React |        143 |          0 |         13 |        156 |
+| Total                                                                                              |                  |      3,355 |          0 |        371 |      3,726 |
++----------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

@@ -1,5 +1,6 @@
-package com.example.footballbootswebapiis.model;
+package com.example.footballbootswebapiis.dto;
 
+import com.example.footballbootswebapiis.dto.FootbalBootsAttributesCreateResponse;
 import com.example.footballbootswebapiis.enumlayer.Brand;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

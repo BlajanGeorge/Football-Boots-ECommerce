@@ -10,5 +10,7 @@ import java.util.List;
 public interface BasketRepository extends JpaRepository<Basket, Integer> {
     List<Basket> getByIdUser(int id);
 
-    void deleteAllByIdBoots(int id);
+    void deleteAllByIdUser(int id);
+
+    void deleteByIdBasket(int idBasket);
 }

@@ -2,13 +2,11 @@ package com.example.footballbootswebapiis.mappers;
 
 import com.example.footballbootswebapiis.enumlayer.Role;
 import com.example.footballbootswebapiis.model.User;
-import com.example.footballbootswebapiis.model.UserCreateRequest;
-import com.example.footballbootswebapiis.model.UserLoginResponse;
-import com.example.footballbootswebapiis.model.UserResponse;
-import com.example.footballbootswebapiis.security.TokenService;
+import com.example.footballbootswebapiis.dto.UserCreateRequest;
+import com.example.footballbootswebapiis.dto.UserLoginResponse;
+import com.example.footballbootswebapiis.dto.UserResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserMapper {

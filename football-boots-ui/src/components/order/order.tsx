@@ -4,6 +4,7 @@ import { Button, Box, FormControlLabel, Switch, AppBar, Toolbar, IconButton, Men
 import { sizeHeight } from '@mui/system'
 import { useState } from 'react'
 import Image from '../../../photo/bank-card.jpeg'
+import axios from 'axios'
 
 export const Order = () => {
     const [prefix, setPrefix] = useState('')
@@ -18,9 +19,18 @@ export const Order = () => {
         setHidden(true)
     }
 
+    async function cleanBasket(){
+      const res = await axios.delete("http://localhost:10000/basket/user/" + localStorage.getItem("userId"), {
+        headers: {
+          authorization:'Bearer ' + localStorage.getItem('token') as string 
+       }
+    })}
+
     const goToLoading = () => {
+      cleanBasket()
       window.location.replace('http://localhost:3000/loading')
     }
+
 
     return (
         <Box>
@@ -66,4 +76,4 @@ export const Order = () => {
       <Button sx={{position:'absolute', marginTop:'600px', marginLeft:'550px', backgroundColor:'black', color:'white', width:'200px'}} onClick={goToLoading}>Order</Button>
         </Box>
     )
-}
+      }

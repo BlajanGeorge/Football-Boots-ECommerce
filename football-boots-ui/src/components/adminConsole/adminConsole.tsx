@@ -99,7 +99,3 @@ return (
 </Box>
 );
 };
-
-function setAnchorEl(currentTarget: EventTarget & HTMLElement) {
-    throw new Error('Function not implemented.');
-}

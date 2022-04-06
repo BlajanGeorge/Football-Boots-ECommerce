@@ -1,4 +1,4 @@
-package com.example.footballbootswebapiis.model;
+package com.example.footballbootswebapiis.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

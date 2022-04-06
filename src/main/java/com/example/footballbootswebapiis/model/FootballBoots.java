@@ -2,7 +2,6 @@ package com.example.footballbootswebapiis.model;
 
 import com.example.footballbootswebapiis.enumlayer.Brand;
 import com.example.footballbootswebapiis.mappers.BrandConverter;
-import com.example.footballbootswebapiis.mappers.RoleConverter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,5 +50,15 @@ public class FootballBoots {
         this.photoPath = photo;
         this.bigPhotoPath = bigPhotoPath;
         this.footballBootsAttributesList.addAll(footballBootsAttributesList);
+    }
+
+    public int getQuantityBySize(int size) {
+        for (FootballBootsAttributes footballBootsAttributes : this.footballBootsAttributesList) {
+            if (footballBootsAttributes.getSize() == size) {
+                return footballBootsAttributes.getQuantity();
+            }
+        }
+
+        return 0;
     }
 }

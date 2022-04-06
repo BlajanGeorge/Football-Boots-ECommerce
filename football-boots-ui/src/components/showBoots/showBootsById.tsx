@@ -7,7 +7,6 @@ import React from 'react'
 import classes from './showBootsById.module.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
-import CloseIcon from '@mui/icons-material/Close';
 
 export const ShowBootsById = () => {
 
@@ -23,7 +22,10 @@ export const ShowBootsById = () => {
     const [descriptionValue, setDescriptionValue] = useState('')
     const [path, setPath] = useState('')
     const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+    const [open3, setOpen3] = React.useState(false);
     const [severity, setSeverity] = useState('success')
+    const [isFavorite, setIsFavorite] = useState(false)
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -50,10 +52,26 @@ export const ShowBootsById = () => {
   
       setOpen(false);
     };
+
+    const handleClose2 = (event?: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen2(false);
+    };
+
+    const handleClose3 = (event?: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen3(false);
+    };
   
 
     async function getBootsByIdAndSize(){
-        const res = axios.get('http://localhost:10000/boots/' + localStorage.getItem('bootsId') + '/' + filterValue, {
+        const res = await axios.get('http://localhost:10000/boots/' + localStorage.getItem('bootsId') + '/' + filterValue, {
         headers: {
             authorization:'Bearer ' + localStorage.getItem('token') as string 
          }
@@ -68,12 +86,26 @@ export const ShowBootsById = () => {
         )
     }
 
+    async function isFavoriteFunction(){
+      const res = await axios.get('http://localhost:10000/favorites/isFavorites/' + localStorage.getItem("userId") + "/" + localStorage.getItem("bootsId"), {
+        headers: {
+          authorization:'Bearer ' + localStorage.getItem('token') as string 
+       }
+      }).then(function(res){
+        setIsFavorite(res.data)
+      })
+    }
+
     const changeToggle = () => {
         setToggle(!toggle)
     }
 
     const handleShopingBag = () => {
       window.location.replace('http://localhost:3000/basket')
+    }
+
+    const handleFavorites = () => {
+      window.location.replace('http://localhost:3000/favorites')
     }
 
     async function addEntryInBasket(){
@@ -95,8 +127,34 @@ export const ShowBootsById = () => {
         })
     }
 
+    async function addToFavorites()
+    {
+      if(isFavorite == false)
+      {
+        const res = await axios.post("http://localhost:10000/favorites", {bootsId:localStorage.getItem("bootsId"), userId:localStorage.getItem("userId")}, {
+        headers: {
+          authorization: 'Bearer ' + localStorage.getItem('token') as string
+      }
+      }).then(function(res){
+        console.log(res.status)
+        if(res.status == 200)
+        {
+          setIsFavorite(true)
+          setOpen2(true)
+        }
+      }).catch(function(error)
+      {
+        if(error.response.status == 400)
+        {
+          setOpen3(true)
+        }
+      })
+    }
+  }
+
     useEffect(() => {
         getBootsByIdAndSize()
+        isFavoriteFunction()
     },[toggle]);
 
     return (
@@ -112,7 +170,7 @@ export const ShowBootsById = () => {
                       onClick={handleHome}>
                             <HomeIcon/>
                         </IconButton>
-                        <IconButton color="inherit">
+                        <IconButton color="inherit" onClick={handleFavorites}>
                             <FavoriteIcon/>
                         </IconButton>
                         <IconButton color="inherit"
@@ -152,6 +210,14 @@ export const ShowBootsById = () => {
                 </Toolbar>
               </AppBar>
               <Box className={classes.box_for_render_boots}>
+              <IconButton sx={{position:'absolute' ,marginLeft:'1100px', marginTop:'600px'}} onClick={addToFavorites}>
+                {isFavorite &&
+                            <FavoriteIcon fontSize='large' color='error'/>
+                }
+                { !isFavorite &&
+                     <FavoriteIcon fontSize='large' color='disabled'/>
+                }
+                        </IconButton>
                   <Typography className={classes.name}>{nameValue}</Typography>
                   <Typography className={classes.size}>Size: </Typography>
                   <Typography className={classes.size_value}>{sizeValue}</Typography>
@@ -165,12 +231,23 @@ export const ShowBootsById = () => {
                    isOptionEqualToValue={(option, value) => option === value}
                    onChange={(event, value) => {setFilterValue(value as string), changeToggle()}}
                    options={options}
+                   defaultValue={'40'}
                    className={classes.select_filter}
                    renderInput={(params) => <TextField {...params} label='Size' size={"small"} />}/>
                    <Button className={classes.add_to_bag} onClick={addEntryInBasket}>Add to bag</Button>
                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                      Item added to bag.
+                    </Alert>
+                    </Snackbar>
+                    <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose}>
+                   <Alert onClose={handleClose2} severity="success" sx={{ width: '100%' }}>
+                     Item added to favorites.
+                    </Alert>
+                    </Snackbar>
+                    <Snackbar open={open3} autoHideDuration={6000} onClose={handleClose}>
+                   <Alert onClose={handleClose3} severity="error" sx={{ width: '100%' }}>
+                     You can't add another item to favorites.
                     </Alert>
                     </Snackbar>
                    <Box className={classes.image_box}>

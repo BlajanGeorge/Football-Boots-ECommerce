@@ -1,15 +1,18 @@
-package com.example.footballbootswebapiis.model;
+package com.example.footballbootswebapiis.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class CreateBasketEntryRequest {
+@AllArgsConstructor
+public class BasketResponse {
+    private int idBasket;
     private int idUser;
     private int idBoots;
     private String name;

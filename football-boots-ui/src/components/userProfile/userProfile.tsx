@@ -70,6 +70,10 @@ const UserProfile = () =>
     useEffect(() => {    
         getProfile() 
     });
+
+    const handleFavorites = () => {
+      window.location.replace('http://localhost:3000/favorites')
+    }
     
     return(
         <Box>
@@ -85,7 +89,7 @@ const UserProfile = () =>
               onClick={handleHome}>
                     <HomeIcon/>
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={handleFavorites}>
                     <FavoriteIcon/>
                 </IconButton>
                 <IconButton color="inherit"
