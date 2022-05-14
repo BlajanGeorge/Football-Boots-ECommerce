@@ -3,6 +3,7 @@ package com.example.footballbootswebapiis.controller;
 import com.example.footballbootswebapiis.dto.BasketResponse;
 import com.example.footballbootswebapiis.dto.CreateBasketEntryRequest;
 import com.example.footballbootswebapiis.service.BasketService;
+import com.example.footballbootswebapiis.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,9 +21,12 @@ import java.util.List;
 public class BasketController {
 
     private final BasketService basketService;
+    private final OrderService orderService;
 
-    public BasketController(BasketService basketService) {
+    public BasketController(BasketService basketService,
+                            OrderService orderService) {
         this.basketService = basketService;
+        this.orderService = orderService;
     }
 
     @PostMapping(value = "/create",
@@ -57,6 +61,7 @@ public class BasketController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity cleanBasketByUserId(@PathVariable int id) {
         log.info("Clean basket request received for user with id {}.", id);
+        this.orderService.createBill(id);
         this.basketService.cleanBasketByUserId(id);
         log.info("Clean basket completed.");
         return new ResponseEntity<>(HttpStatus.OK);

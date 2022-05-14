@@ -5,6 +5,7 @@ import com.example.footballbootswebapiis.exceptions.EntityNotFoundException;
 import com.example.footballbootswebapiis.mappers.FootballBootsMapper;
 import com.example.footballbootswebapiis.model.*;
 import com.example.footballbootswebapiis.service.FootballBootsService;
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.http.HttpStatus;

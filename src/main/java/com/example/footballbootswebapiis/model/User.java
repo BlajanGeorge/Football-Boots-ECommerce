@@ -41,6 +41,9 @@ public class User {
     @Column
     @OneToMany(mappedBy = "user")
     private List<Favorites> favoritesList;
+    @Column
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Rating> ratingsList;
 
     public User(String firstName, String lastName, String email, String gender, int age, String password, Role role) {
         this.firstName = firstName;
@@ -51,5 +54,6 @@ public class User {
         this.password = password;
         this.role = role;
         this.favoritesList = new ArrayList<>();
+        this.ratingsList = new ArrayList<>();
     }
 }

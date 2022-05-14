@@ -28,7 +28,8 @@ public class BasketService implements BasketServiceApi {
 
     public List<BasketResponse> getBasketByUserId(final int id) {
         List<BasketResponse> basketResponses = new ArrayList<>();
-        for (Basket basket : this.basketRepository.getByIdUser(id)) {
+        List<Basket> baskets = this.basketRepository.getByIdUser(id);
+        for (Basket basket : baskets) {
             basketResponses.add(BasketMapper.mapFromBasketModelToBasketResponse(basket));
         }
         return basketResponses;

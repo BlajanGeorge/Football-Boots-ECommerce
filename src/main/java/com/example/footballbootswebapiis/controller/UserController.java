@@ -1,9 +1,6 @@
 package com.example.footballbootswebapiis.controller;
 
-import com.example.footballbootswebapiis.dto.UserCreateRequest;
-import com.example.footballbootswebapiis.dto.UserLoginRequest;
-import com.example.footballbootswebapiis.dto.UserResponse;
-import com.example.footballbootswebapiis.dto.UserUpdateRequest;
+import com.example.footballbootswebapiis.dto.*;
 import com.example.footballbootswebapiis.enumlayer.Role;
 import com.example.footballbootswebapiis.exceptions.BadCredentialsException;
 import com.example.footballbootswebapiis.exceptions.EntityNotFoundException;
@@ -14,10 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -108,5 +107,43 @@ public class UserController {
             log.warn("Email sending failed.", e);
         }
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PutMapping("/order")
+    public ResponseEntity order(@RequestBody OrderDto orderDto) {
+        log.info("Order request received for email {}, price {}.", orderDto.getEmail(), orderDto.getPrice());
+        try {
+            this.userService.order(orderDto.getEmail(), BigDecimal.valueOf(orderDto.getPrice()));
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (HttpStatusCodeException ex) {
+            log.error("Order request failed for email {}. Status {}, message {}.", orderDto.getEmail(), ex.getStatusCode(), ex.getMessage());
+            return ResponseEntity.status(ex.getStatusCode()).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/logout/user/{email}")
+    public ResponseEntity<Object> logout(@PathVariable(value = "email") String email) {
+        log.info("Logout request received for email {}.", email);
+        this.userService.logout(email);
+        log.info("User {} logout with success.", email);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/logs")
+    public ResponseEntity<List<LogHistoryDto>> getLogs() {
+        log.info("Logs request received.");
+        return new ResponseEntity<>(userService.getLogs(), HttpStatus.OK);
+    }
+
+    @GetMapping("/logs/user/{userEmail}")
+    public ResponseEntity<List<LogHistoryDto>> getUserLogs(@PathVariable(value = "userEmail") String user) {
+        log.info("Logs request received for user {}.", user);
+        return new ResponseEntity<>(userService.getUserLogs(user), HttpStatus.OK);
+    }
+
+    @GetMapping("/logs/online")
+    public ResponseEntity<Integer> getOnlineUsers() {
+        log.info("Online users request received.");
+        return new ResponseEntity<>(userService.getOnlineUsers(), HttpStatus.OK);
     }
 }

@@ -1,0 +1,38 @@
+div .chat_container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+div .chat_container_left {
+    margin-right: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 15px;
+}
+
+div .chip_right {
+    width: fit-content;
+    background-color: rgb(195, 195, 198);
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+div .chip {
+    width: fit-content;
+    background-color: rgb(98, 122, 227);
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+div .text {
+    font-size: 12px;
+    font-weight: 100;
+}

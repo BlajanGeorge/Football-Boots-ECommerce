@@ -3,10 +3,7 @@ package com.example.footballbootswebapiis.service;
 import com.example.footballbootswebapiis.customvalidators.EmailValidator;
 import com.example.footballbootswebapiis.customvalidators.GenderValidator;
 import com.example.footballbootswebapiis.customvalidators.PasswordValidator;
-import com.example.footballbootswebapiis.dto.UserLoginRequest;
-import com.example.footballbootswebapiis.dto.UserLoginResponse;
-import com.example.footballbootswebapiis.dto.UserResponse;
-import com.example.footballbootswebapiis.dto.UserUpdateRequest;
+import com.example.footballbootswebapiis.dto.*;
 import com.example.footballbootswebapiis.exceptions.BadCredentialsException;
 import com.example.footballbootswebapiis.exceptions.EntityNotFoundException;
 import com.example.footballbootswebapiis.mail.Email;
@@ -15,15 +12,22 @@ import com.example.footballbootswebapiis.mappers.UserMapper;
 import com.example.footballbootswebapiis.model.*;
 import com.example.footballbootswebapiis.repository.BasketRepository;
 import com.example.footballbootswebapiis.repository.FavoritesRepository;
+import com.example.footballbootswebapiis.repository.LogHistoryRepository;
 import com.example.footballbootswebapiis.repository.UserRepository;
 import com.example.footballbootswebapiis.security.TokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,17 +42,22 @@ public class UserService implements UserServiceApi {
     private final TokenService tokenService;
     private final BasketRepository basketRepository;
     private final FavoritesRepository favoritesRepository;
+    private final LogHistoryRepository logHistoryRepository;
+    private final RestTemplate restTemplate;
 
     public UserService(final UserRepository userRepository,
                        final BCryptPasswordEncoder bCryptPasswordEncoder,
                        final TokenService tokenService,
                        final BasketRepository basketRepository,
-                       final FavoritesRepository favoritesRepository) {
+                       final FavoritesRepository favoritesRepository,
+                       final LogHistoryRepository logHistoryRepository) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.tokenService = tokenService;
         this.basketRepository = basketRepository;
         this.favoritesRepository = favoritesRepository;
+        this.logHistoryRepository = logHistoryRepository;
+        this.restTemplate = new RestTemplate();
     }
 
     public List<UserResponse> getUsers() {
@@ -74,6 +83,7 @@ public class UserService implements UserServiceApi {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (bCryptPasswordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
+                logHistoryRepository.save(new LogHistory(user.getEmail(), "LOGIN"));
                 return UserMapper.mapFromModelToUserLoginResponse(user, tokenService.getJWTToken(user.getFirstName(), user.getRole()));
             } else {
                 throw new BadCredentialsException("Incorrect email/password!");
@@ -81,6 +91,10 @@ public class UserService implements UserServiceApi {
         } else {
             throw new BadCredentialsException("Incorrect email/password!");
         }
+    }
+
+    public void logout(final String email) {
+        this.logHistoryRepository.save(new LogHistory(email, "LOGOUT"));
     }
 
     @Transactional
@@ -93,7 +107,7 @@ public class UserService implements UserServiceApi {
                     .build();
 
             EmailSender.sendEmail(email);
-        } catch (MessagingException e) {
+        } catch (MessagingException | IOException e) {
             e.printStackTrace();
             log.error("Failed to send the email.");
         }
@@ -108,10 +122,14 @@ public class UserService implements UserServiceApi {
                     .build();
 
             EmailSender.sendEmail(emailEntity);
-        } catch (MessagingException e) {
+        } catch (MessagingException | IOException e) {
             e.printStackTrace();
             log.error("Failed to send the email.");
         }
+    }
+
+    public void order(final String email, final BigDecimal price) {
+        restTemplate.exchange("http://localhost:10002/account", HttpMethod.PUT, new HttpEntity<>(new UpdateAccountDto(email, price), null), Object.class);
     }
 
     @Transactional
@@ -153,6 +171,40 @@ public class UserService implements UserServiceApi {
         }
 
         return UserMapper.mapFromUserModelToUserResponse(this.userRepository.save(oldUser));
+    }
+
+    public List<LogHistoryDto> getLogs() {
+        List<LogHistory> logHistories = this.logHistoryRepository.findAll();
+        List<LogHistoryDto> logHistoryDtos = new ArrayList<>();
+        for (LogHistory logHistory : logHistories) {
+            logHistoryDtos.add(new LogHistoryDto(logHistory.getUser(), logHistory.getOperation(), logHistory.getTimestamp()));
+        }
+
+        return logHistoryDtos;
+    }
+
+    public List<LogHistoryDto> getUserLogs(final String user) {
+        List<LogHistory> logHistories = this.logHistoryRepository.findAll();
+        List<LogHistoryDto> logHistoryDtos = new ArrayList<>();
+        for (LogHistory logHistory : logHistories) {
+            if (logHistory.getUser().contains(user)) {
+                logHistoryDtos.add(new LogHistoryDto(logHistory.getUser(), logHistory.getOperation(), logHistory.getTimestamp()));
+            }
+        }
+        return logHistoryDtos;
+    }
+
+    public Integer getOnlineUsers() {
+        int count = 0;
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            LogHistory logHistory = logHistoryRepository.getLogHistoryByUserAndMaxTimestamp(user.getEmail());
+            if (logHistory != null && logHistory.getOperation().equals("LOGIN") && logHistory.getTimestamp().getTime() > Instant.now().toEpochMilli() - 1200000) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
 }

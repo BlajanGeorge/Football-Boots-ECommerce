@@ -17,7 +17,7 @@ public class MyDatabaseUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email).orElseThrow(
-                () -> new EntityNotFoundException(String.format("There is not a usuer with email %s.", email)));
+                () -> new EntityNotFoundException(String.format("There is not a user with email %s.", email)));
         return new MyUser(user);
     }
 }
